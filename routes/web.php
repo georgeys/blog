@@ -15,7 +15,7 @@
 //    return view('welcome');
 //});
 //注册页面
-Route::get('/', 'RegisterController@index');
+Route::get('/','RegisterController@index');
 //注册行为
 Route::post('/', 'RegisterController@register');
 
@@ -32,11 +32,11 @@ Route::get('/user/me/setting', 'UserController@setting');
 Route::post('/user/me/setting', 'UserController@settingStore');
 
 //文章
-Route::get('/post','PostController@index');
+Route::get('/posts','PostController@index');
 //文章详情页
 Route::get('/posts/{post}', 'PostController@show');
 //创建文章
-route::get('/posts/create','PostController@create');
+route::get('/create','PostController@create');
 route::post('/posts','PostController@store');
 //编辑文章
 route::get('/posts/{post}/edit','PostController@edit');
