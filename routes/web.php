@@ -30,3 +30,17 @@ Route::get('/logout', 'LoginController@logout');
 Route::get('/user/me/setting', 'UserController@setting');
 //个人设置操作
 Route::post('/user/me/setting', 'UserController@settingStore');
+
+//文章
+Route::get('/post','PostController@index');
+//文章详情页
+Route::get('/posts/{post}', 'PostController@show');
+//创建文章
+route::get('/posts/create','PostController@create');
+route::post('/posts','PostController@store');
+//编辑文章
+route::get('/posts/{post}/edit','PostController@edit');
+route::put('/posts/{post}/update','PostController@update');
+//删除
+route::get('/posts/delete','PostController@delete');
+

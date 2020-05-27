@@ -22,6 +22,7 @@ class LoginController extends Controller
             'password'    => 'required|min:5|max:10',
             'is_remember' => 'integer'
         ]);
+
         //逻辑
         $user = \request(['email','password']);
         $is_remember = \request('is_remember');
