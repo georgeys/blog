@@ -31,7 +31,7 @@
             </div>
             @endif
             @foreach($post->zans as $zan)
-               {{z$zan->user->name."/"}}
+               {{$zan->user->name."/"}}
             @endforeach
 
         </div>
