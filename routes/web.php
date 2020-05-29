@@ -14,6 +14,9 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+//清理缓存
+
+Route::get('/clear', function() { \Illuminate\Support\Facades\Artisan::call('cache:clear');return "Cache is cleared";});
 //注册页面
 Route::get('/','RegisterController@index');
 //注册行为
@@ -34,13 +37,28 @@ Route::post('/user/me/setting', 'UserController@settingStore');
 //文章
 Route::get('/posts','PostController@index');
 //文章详情页
-Route::get('/posts/{post}', 'PostController@show');
+Route::get('/posts/{post}', 'PostController@show')->where('post','[0-9]+');
 //创建文章
-route::get('/create','PostController@create');
+//route::get('/create','PostController@create');
+route::get('/posts/create','PostController@create');
 route::post('/posts','PostController@store');
 //编辑文章
 route::get('/posts/{post}/edit','PostController@edit');
 route::put('/posts/{post}/update','PostController@update');
 //删除
-route::get('/posts/delete','PostController@delete');
+route::get('/posts/{post}/delete','PostController@delete');
+//图片上传
+route::put('/posts/image/upload','PostController@imageUpload');
+//添加评论
+route::post('/posts/{post}/comment','PostController@comment');
+//赞
+Route::get('/posts/{post}/zan', 'PostController@zan');
+Route::get('/posts/{post}/unzan', 'PostController@unzan');
+
+//user个人主页
+Route::get('/posts/{user}', 'UserController@show');
+//
+Route::get('/posts/me/setting', 'PostController@setting');
+
+
 
