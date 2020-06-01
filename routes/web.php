@@ -29,10 +29,13 @@ Route::post('/login', 'LoginController@login');
 //登出行为
 Route::get('/logout', 'LoginController@logout');
 
-//个人主页
+//个人中心
 Route::get('/user/{user}', 'UserController@show');
 //个人设置操作
-Route::post('/user/{user}/fan', 'UserController@settingStore');
+//关注
+Route::post('/user/{user}/fan', 'UserController@fan');
+//取消关注
+Route::post('/user/{user}/unfan', 'UserController@unfan');
 
 
 //个人设置页面
@@ -62,5 +65,9 @@ route::post('/posts/{post}/comment','PostController@comment');
 Route::get('/posts/{post}/zan', 'PostController@zan');
 Route::get('/posts/{post}/unzan', 'PostController@unzan');
 
+//专题详情页
+Route::get('/topic/{topic}','TopicController@show');
+//投稿
+Route::get('/topic/{topic}/submit','TopicController@submit');
 
 

@@ -24,7 +24,7 @@
                     <div>
                         @if( Auth::id() )
                             {{Auth::user()->name}}
-                        <img src="image/user.jpeg" alt="" class="img-rounded" style="border-radius:500px; height: 30px">
+                        <img src="{{Auth::user()->avatar}}" alt="" class="img-rounded" style="border-radius:500px; height: 30px">
                         <a href="#" class="blog-nav-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <span class="caret"></span></a>
                         <ul class="dropdown-menu">

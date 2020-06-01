@@ -35,35 +35,42 @@ class User extends Authenticatable
         //直接调用stats添加
         $fan = new fan();
         $fan->star_id = $uid;
+        //这行可不写
         $fan->fan_id  = Auth::id();
         return $this->stars()->save($fan);
     }
-    //取消关注某人行为
-    //uid为关注对象的id
-    public function doUnFan($uid)
-    {
-        //直接调用stats添加
-        $fan = new fan();
-        $fan->star_id = $uid;
-        $fan->fan_id  = Auth::id();
-        return $this->stars()->delete($fan);
-    }
+//    //取消关注某人行为
+//    //uid为关注对象的id
+//    public function doUnFan($uid)
+//    {
+//        //直接调用stats添加
+//        $fan = new fan();
+//        $fan->star_id = $uid;
+//        return $this->stars()->delete($fan);
+//    }
     //当前用户是否被uid关注了
     //检查我是否被某个人粉了
     public function hasFan($uid)
     {
-        return $this->fans()->where(['fan_id'=>$uid,'star_id'=>Auth::id()])->count();
+        //Auth::id();可以不写
+        return $this->fans()->where('fan_id',$uid)->count();
+        //return $this->stars()->where('fan_id',$uid)->count();
     }
     //检查我是否关注了uid
     public function hasStar($uid)
     {
-        return $this->stars()->where(['fan_id'=>Auth::id(),'star_id'=>$uid])->count();
+        return $this->stars()->where('star_id',$uid)->count();
     }
 
-
+    //关联评论
     public function comments()
     {
         return $this->hasMany('App\Comment','user_id','id');
+    }
+    //默认头像
+    public function getAvatarAttribute($value)
+    {
+        return $value ?: '/image/avatar.jpg';
     }
 
 
