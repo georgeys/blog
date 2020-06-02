@@ -23,7 +23,9 @@
                             {!! str_limit($post->content,100,'...') !!}
                         </div>
                         @endforeach
+                            {{$posts->links()}}
                     </div>
+
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
 
@@ -34,6 +36,7 @@
                             @include('user.like',['target_user' => $user])
                         </div>
                         @endforeach
+                            {{$susers->links()}}
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_3">
@@ -44,6 +47,7 @@
                                 @include('user.like',['target_user' => $user])
                             </div>
                         @endforeach
+                        {{$fusers->links()}}
                     </div>
                     <!-- /.tab-pane -->
                 </div>

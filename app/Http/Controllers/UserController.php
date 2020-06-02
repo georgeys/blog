@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         //个人的信息，包含文章数/粉丝/关注
         //without中填写model：User中的hansMany的方法名（得到数量）
-        $posts = $user->posts()->orderBy('created_at','desc')->take(10)->get();
+        $posts = $user->posts()->orderBy('created_at','desc')->paginate(2);
         $user1 = User::withCount(['posts','fans','stars'])->find($user->id);
         //dd($user1);
         //返回多user1比user多上3个数量
@@ -47,14 +47,14 @@ class UserController extends Controller
         //个人关注的用户，该用户的姓名/粉丝/关注
         //pluck取表中一列中所有值组成数组(取出来$stars所有的star_id)
         $stars = $user->stars()->get();
-        $susers = User::whereIn('id',$stars->pluck('star_id'))->withCount(['posts','fans','stars'])->get();
+        $susers = User::whereIn('id',$stars->pluck('star_id'))->withCount(['posts','fans','stars'])->paginate(10);
 
 
         //关注这个人的用户（这个人的粉丝），该用户的姓名/粉丝/关注
         //$fans = $user ->fans()->get();可以写成这样
         //pluck取表中一列中所有值组成数组(取出来$fans所有的fan_id)
         $fans = $user ->fans;
-        $fusers = User::whereIn('id',$fans->pluck('fan_id'))->withCount(['posts','fans','stars'])->get();
+        $fusers = User::whereIn('id',$fans->pluck('fan_id'))->withCount(['posts','fans','stars'])->paginate(10);
         return view('user.show',compact('posts','user1','susers','fusers'));
     }
     //关注用户

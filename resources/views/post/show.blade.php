@@ -30,10 +30,12 @@
             <a href="/posts/{{$post->id}}/zan" type="button" class="btn btn-primary  btn-lg">赞</a>
             </div>
             @endif
+            @if($post->zans)
             @foreach($post->zans as $zan)
-               {{$zan->user->name."/"}}
+               {{$zan->user->name.","}}
             @endforeach
-
+                觉得很赞
+            @endif
         </div>
 
 

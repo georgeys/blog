@@ -66,8 +66,8 @@ Route::get('/posts/{post}/zan', 'PostController@zan');
 Route::get('/posts/{post}/unzan', 'PostController@unzan');
 
 //专题详情页
-Route::get('/topic/{topic}','TopicController@show');
+Route::get('/topic/{topic}','TopicController@show')->where('post','[0-9]+');
 //投稿
-Route::get('/topic/{topic}/submit','TopicController@submit');
+Route::post('/topic/{topic}/submit','TopicController@submit');
 
 
