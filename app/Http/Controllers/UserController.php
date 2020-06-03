@@ -15,10 +15,29 @@ class UserController extends Controller
     {
         return view('user.setting');
     }
-    //个人设置行为
-    public function settingStore()
+    //个人设置行为修改姓名头像
+    public function settingStore(Request $request)
     {
-
+        $this->validate($request,[
+            'name'=>'required|min:2|max:20',
+        ]);
+        $user   =  User::find(Auth::id());
+        $user->name = \request('name');
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid())
+        {
+        //获取后缀
+        $avatar = $request->file('avatar');
+        $ext =  $avatar->getClientOriginalExtension();
+        if (!in_array($ext,array('jpg','JPG','jpeg','JPEG','gif','GIF','png','PNG'))){
+            echo "<script>alert('文件格式错误,仅支持 jpg ,gif,png,jpeg');";
+            };
+        //上传存到服务器的文件名
+        $upload_avatar = md5(Auth::id()).".".$ext;
+        $avatar->move('./uploads/avatar',$upload_avatar);
+        $user->avatar = '/uploads/avatar'.'/'.$upload_avatar;
+        }
+        $result = $user->save();
+        if ($result){return redirect("/user/".Auth::id());}
     }
     //个人中心详情页面
     public function show(User $user)

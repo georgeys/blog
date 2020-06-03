@@ -70,4 +70,5 @@ Route::get('/topic/{topic}','TopicController@show')->where('post','[0-9]+');
 //投稿
 Route::post('/topic/{topic}/submit','TopicController@submit');
 
+//后台
 

@@ -56,5 +56,11 @@ $(".like-button").click(function (event) {
     }
     //关注
 
-
+})
+//预览头像
+$("#avatar").change(function () {
+    var img_src = URL.createObjectURL($(this)[0].files[0]);
+    //给img标检的src赋值
+    document.getElementById("avatarImg").src=img_src;
+    //URL.revokeObjectURL(img_src);// 手动 回收，
 })
