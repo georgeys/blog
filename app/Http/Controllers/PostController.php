@@ -54,23 +54,23 @@ class PostController extends Controller
         return view('post.edit',compact('post'));
     }
 
-    //编辑逻辑
-    public function update(Post $post)
-    {
-        //验证
-        $this->validate(\request(),[
-            'title' => 'required|string|max:100|min:3',
-            'content' => 'required|string|min:50'
-        ]);
-        //编辑权限
-        $this->authorize('update',$post);
-        //逻辑
-        $post->title = \request('title');
-        $post->content = \request('content');
-        $post->save();
-        //渲染
-        return redirect("/posts/{$post->id}");
-    }
+//    //编辑逻辑
+//    public function update(Post $post)
+//    {
+//        //验证
+//        $this->validate(\request(),[
+//            'title' => 'required|string|max:100|min:3',
+//            'content' => 'required|string|min:50'
+//        ]);
+//        //编辑权限
+//        $this->authorize('update',$post);
+//        //逻辑
+//        $post->title = \request('title');
+//        $post->content = \request('content');
+//        $post->save();
+//        //渲染
+//        return redirect("/posts/{$post->id}");
+//    }
 
     //删除功能
     public function delete(Post $post)
