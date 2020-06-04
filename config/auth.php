@@ -72,7 +72,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-        //添加的管理员
         'admins'=>[
             'driver' => 'eloquent',
             'model' => App\AdminUser::class,

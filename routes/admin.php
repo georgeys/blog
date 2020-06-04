@@ -12,7 +12,7 @@ Route::group(['prefix' => 'admin'], function() {
     //添加中间键未登录不可访问
     //auth:admin为config\auth.php文件guards下定义的admin
 
-    Route::group(['middleware' => 'admin'], function(){
+    Route::group(['middleware' => 'auth.admin'], function(){
         //首页
         Route::get('/home','Admin\HomeController@index');
     });
