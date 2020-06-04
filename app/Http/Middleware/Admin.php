@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\AdminUser;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +17,17 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() ==''){
-            return redirect('admin/login');
+        if (Auth::check()){
+            $adminName= $request->user()->name;
+            $adminid= $request->user()->id;
+            $adminpass= $request->user()->password;
+            $result=AdminUser::where([["name",$adminName],["password",$adminpass]])->count();
+            if ($result<=0)
+            {
+                return $next($request);
+            }
         }
-        return $next($request);
+        return redirect('/admin/login');
+
     }
 }

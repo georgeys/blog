@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="/css/wangEditor.min.css">
 
 
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -33,7 +34,7 @@
 
 <body>
 
-@include("layout.nav")
+@include("layouts.nav")
 <div class="container">
 
     <div class="blog-header">
@@ -42,10 +43,10 @@
     <div class="row">
 	    @yield("content")
 
-		@include("layout.sidebar")
+		@include("layouts.sidebar")
    </div><!-- /.row -->
 </div><!-- /.container -->
-@include("layout.footer")
+@include("layouts.footer")
 
 @yield("pagejs")
 <!-- Bootstrap core JavaScript

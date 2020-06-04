@@ -3,7 +3,7 @@
         <form action="/posts/search" method="GET">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a class="blog-nav-item " href="/posts">首页</a>
+                    <a class="blog-nav-item " href="/">首页</a>
                 </li>
                 <li>
                     <a class="blog-nav-item" href="/posts/create">写文章</a>
@@ -30,7 +30,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="/user/{{ Auth::id() }}">我的主页</a></li>
                             <li><a href="/user/me/setting">个人设置</a></li>
-                            <li><a href="/logout">登出</a></li>
+                            <li><a href="/user/out">推出</a></li>
+
                         </ul>
                         @else
                                 <a href="/login" class="blog-nav-item ">登录</a>

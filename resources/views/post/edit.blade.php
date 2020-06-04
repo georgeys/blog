@@ -1,4 +1,4 @@
-@extends("layout.main")
+@extends("layouts.main")
 
 @section("content")
 
@@ -17,7 +17,7 @@
 	                {{$post->content}}
                 </textarea>
             </div>
-	        @include("layout.error")
+	        @include("layouts.error")
             <button type="submit" class="btn btn-default">提交</button>
         </form>
         <br>

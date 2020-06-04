@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
         //设置默认string长度
         Schema::defaultStringLength(191);
 //视图合成器  直接向视图siderbar传输数据
-        view()->composer("layout.sidebar",function ($view){
+        view()->composer("layouts.sidebar",function ($view){
             $toptic = Topic::all();
             $view->with('topics',$toptic);
         });

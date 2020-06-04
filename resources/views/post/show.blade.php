@@ -1,4 +1,4 @@
-@extends("layout.main")
+@extends("layouts.main")
 
 @section("content")
     <div class="col-sm-8 blog-main">
@@ -68,7 +68,7 @@
 	                <input type="hidden" name="post_id" value="{{$post->id}}"/>
 	                <li class="list-group-item">
                         <textarea name="content" class="form-control" rows="10"></textarea>
-                        @include('layout.error')
+                        @include('layouts.error')
 	                    <button class="btn btn-default" type="submit">提交</button>
                     </li>
                 </form>

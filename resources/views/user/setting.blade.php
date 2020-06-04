@@ -1,4 +1,4 @@
-@extends("layout.main")
+@extends("layouts.main")
 @section("content")
 
     <div class="col-sm-8 blog-main">
@@ -17,7 +17,7 @@
                     <img  class="preview_img" src="{{Auth::user()->avatar}}" alt="" id="avatarImg" class="img-rounded" style="border-radius:400px;margin-top: 10px;height: 110px;width: 100px">
                 </div>
             </div>
-            @include("layout.error")
+            @include("layouts.error")
             <button type="submit" class="btn btn-default">修改</button>
         </form>
         <br>
