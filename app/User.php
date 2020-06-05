@@ -2,17 +2,19 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
     //
-    public $table = 'users';
+    protected $table = 'users';
 
     protected $fillable = ['name','email','password','avatar'];
 
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
     //用户文章
     public function posts()
     {
