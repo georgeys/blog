@@ -34,7 +34,7 @@ Route::group(['prefix' => 'admin'], function() {
         //权限
         Route::get('/permissions','Admin\PermissionController@index');
         Route::get('/permissions/create','Admin\PermissionController@create');
-        Route::get('/permissions/store','Admin\PermissionController@store');
+        Route::post('/permissions/store','Admin\PermissionController@store');
 
 
         //审核模块
