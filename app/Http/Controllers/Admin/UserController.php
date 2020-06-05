@@ -64,7 +64,7 @@ class UserController extends Controller
         $deleteRoles = $myRoles->diff($roles);
         foreach ($deleteRoles as $role)
         {
-            $user->deleteRole($roles);
+            $user->deleteRole($role);
         }
         return back();
 

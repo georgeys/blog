@@ -15,26 +15,30 @@ Route::group(['prefix' => 'admin'], function() {
     Route::group(['middleware' => 'auth.admin'], function(){
         //首页
         Route::get('/home','Admin\HomeController@index');
-        //管理人员模块
-        Route::get('users','Admin\UserController@index');
-        Route::get('users/create','Admin\UserController@create');
-        Route::post('users/store','Admin\UserController@store');
-        //人员关联角色
-        Route::get('users/{user}/role','Admin\UserController@role');
-        Route::post('users/{user}/role','Admin\UserController@storeRole');
 
-        //角色
-        Route::get('roles','Admin\RoleController@index');
-        Route::get('roles/create','Admin\RoleController@create');
-        Route::post('roles/store','Admin\RoleController@store');
-        //角色关联权限
-        Route::get('roles/{role}/permission','Admin\RoleController@permission');
-        Route::post('roles/{role}/permission','Admin\RoleController@storePermission');
+        //权限设置
+        Route::group(['middleware'=>'can:system'],function (){
+            //管理人员模块
+            Route::get('users','Admin\UserController@index');
+            Route::get('users/create','Admin\UserController@create');
+            Route::post('users/store','Admin\UserController@store');
+            //人员关联角色
+            Route::get('users/{user}/role','Admin\UserController@role');
+            Route::post('users/{user}/role','Admin\UserController@storeRole');
+            //角色
+            Route::get('roles','Admin\RoleController@index');
+            Route::get('roles/create','Admin\RoleController@create');
+            Route::post('roles/store','Admin\RoleController@store');
+            //角色关联权限
+            Route::get('roles/{role}/permission','Admin\RoleController@permission');
+            Route::post('roles/{role}/permission','Admin\RoleController@storePermission');
 
-        //权限
-        Route::get('/permissions','Admin\PermissionController@index');
-        Route::get('/permissions/create','Admin\PermissionController@create');
-        Route::post('/permissions/store','Admin\PermissionController@store');
+            //权限
+            Route::get('/permissions','Admin\PermissionController@index');
+            Route::get('/permissions/create','Admin\PermissionController@create');
+            Route::post('/permissions/store','Admin\PermissionController@store');
+        });
+
 
 
         //审核模块
