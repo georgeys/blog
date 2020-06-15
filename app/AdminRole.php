@@ -40,6 +40,6 @@ class AdminRole extends Model
      */
     public function hasPermission($permission)
     {
-        return $this->permissions->contains($permission);
+        return $this->permissions()->contains($permission);
     }
 }

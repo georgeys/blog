@@ -12,7 +12,6 @@ class HomeController extends Controller
     //首页
     public function index()
     {
-        dd(Auth::guard("admin")->user()->roles);
         return view('admin.home.index');
     }
 }
