@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\AdminUser;
 use App\Topic;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;

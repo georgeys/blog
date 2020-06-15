@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\AdminPermission;
+use App\AdminUser;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -28,15 +29,14 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         //定义权限
         //所有的权限
-        $permissions = AdminPermission::all();
-        foreach ($permissions as $permission)
-        {
+        $permissions = AdminPermission::with("roles")->get();
+        foreach ($permissions as $permission){
             //定义门卫（以permission的name定义）
-            Gate::define($permission->name,function ($user) use($permission){
-                return $user->hasPermission($permission);
+            Gate::define($permission->name,function (AdminUser $user) use($permission){
+                if ($user instanceof AdminUser) {
+                    return $user->hasPermission($permission);
+                }
             });
         }
-
-        //
     }
 }

@@ -67,7 +67,6 @@ class UserController extends Controller
             $user->deleteRole($role);
         }
         return back();
-
     }
 
 }

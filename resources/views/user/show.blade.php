@@ -2,7 +2,7 @@
 @section('content')
         <div class="col-sm-8">
             <blockquote>
-                <p><img src="{{$user1->avatar}}" alt="" class="img-rounded" style="border-radius:500px; height: 40px"> {{$user1->name}}
+                <p><img src="{{$user1->avatar}}" alt="" class="img-rounded" style="border-radius:500px; height: 40px"> {{Auth::user()->name}}
                 </p>
                 <footer>关注：{{$user1->stars_count}}｜粉丝：{{$user1->fans_count}}｜文章：{{$user1->posts_count}}</footer>
             </blockquote>

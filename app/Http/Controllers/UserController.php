@@ -44,9 +44,8 @@ class UserController extends Controller
     {
         //个人的信息，包含文章数/粉丝/关注
         //without中填写model：User中的hansMany的方法名（得到数量）
-        $posts = $user->posts()->orderBy('created_at','desc')->paginate(2);
-        $user1 = User::withCount(['posts','fans','stars'])->find($user->id);
-        //dd($user1);
+        $posts = $user->posts()->orderBy('created_at','desc')->paginate(5);
+        $user1 = User::withCount(['posts','fans','stars'])->get()->where('id', $user->id)->first();
         //返回多user1比user多上3个数量
         //  #attributes: array:11 [▼
         //    "id" => 5

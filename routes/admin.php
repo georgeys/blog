@@ -16,8 +16,8 @@ Route::group(['prefix' => 'admin'], function() {
         //首页
         Route::get('/home','Admin\HomeController@index');
 
-        //权限设置
-        Route::group(['middleware'=>'can:system'],function (){
+        // 系统管理
+        Route::group(['middleware' => 'can:system'], function(){
             //管理人员模块
             Route::get('users','Admin\UserController@index');
             Route::get('users/create','Admin\UserController@create');
@@ -32,22 +32,16 @@ Route::group(['prefix' => 'admin'], function() {
             //角色关联权限
             Route::get('roles/{role}/permission','Admin\RoleController@permission');
             Route::post('roles/{role}/permission','Admin\RoleController@storePermission');
-
             //权限
             Route::get('/permissions','Admin\PermissionController@index');
             Route::get('/permissions/create','Admin\PermissionController@create');
             Route::post('/permissions/store','Admin\PermissionController@store');
         });
-
-
-
-        //审核模块
-        Route::get('posts','Admin\PostController@index');
-        Route::post('posts/{post}/status','Admin\PostController@status');
+        Route::group(['middleware'=>'can:post'],function () {
+            //审核文章模块
+            Route::get('posts', 'Admin\PostController@index');
+            Route::post('posts/{post}/status', 'Admin\PostController@status');
+        });
     });
-
-
-
-
 
 });

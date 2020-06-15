@@ -22,20 +22,22 @@
 	            <a href="#">{{$post->user->name}}</a>
             </p>
             <p>{!! $post->content !!}</p>
-            <div>
+            <div class="panel panel-default">
 
              @if($post->zan(\Auth::id())->exists())
             <a href="/posts/{{$post->id}}/unzan" type="button" class="btn btn-default  btn-lg">取消赞</a>
             @else
             <a href="/posts/{{$post->id}}/zan" type="button" class="btn btn-primary  btn-lg">赞</a>
-            </div>
             @endif
-            @if($post->zans)
+            @if($post->zans()->exists())
+                <p>
             @foreach($post->zans as $zan)
                {{$zan->user->name.","}}
             @endforeach
                 觉得很赞
+                </p>
             @endif
+            </div>
         </div>
 
 
