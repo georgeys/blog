@@ -17,7 +17,7 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('/home','Admin\HomeController@index');
 
         // 系统管理
-        Route::group(['middleware' => 'can:system'], function(){
+
             //管理人员模块
             Route::get('users','Admin\UserController@index');
             Route::get('users/create','Admin\UserController@create');
@@ -36,12 +36,19 @@ Route::group(['prefix' => 'admin'], function() {
             Route::get('/permissions','Admin\PermissionController@index');
             Route::get('/permissions/create','Admin\PermissionController@create');
             Route::post('/permissions/store','Admin\PermissionController@store');
-        });
-        Route::group(['middleware'=>'can:post'],function () {
+
+
             //审核文章模块
             Route::get('posts', 'Admin\PostController@index');
             Route::post('posts/{post}/status', 'Admin\PostController@status');
+
+            //文章专题
+            Route::resource('topics','Admin\TopicController',['only'=>['index','create',
+                'store','destroy']]);
+            //通知
+        Route::resource('notices','Admin\NoticeController',['only'=>['index',
+            'create','store']]);
         });
-    });
+
 
 });

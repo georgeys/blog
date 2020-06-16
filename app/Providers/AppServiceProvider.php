@@ -26,6 +26,18 @@ class AppServiceProvider extends ServiceProvider
             $toptic = Topic::all();
             $view->with('topics',$toptic);
         });
+        view()->composer("admin.layout.sidebar",function ($view){
+            $permissions = array();
+            $roles = Auth::guard("admin")->user()->roles;
+            foreach ($roles as $role)
+            {
+                foreach ($role->permissions as $permission)
+                {
+                    $permissions[] = $permission->name;
+                }
+            }
+            $view->with('permissions',$permissions);
+        });
     }
 
     /**

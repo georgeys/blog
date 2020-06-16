@@ -74,4 +74,15 @@ class User extends Authenticatable
     {
         return $value ?: '/image/avatar.jpg';
     }
+    //用户收到的通知
+    public function notices()
+    {
+        return $this->belongsToMany(Notice::class,'user_notice',
+            'user_id','notice_id');
+    }
+    //给用户添加通知
+    public function addNotice($notice)
+    {
+        return $this->notices()->save($notice);
+    }
 }

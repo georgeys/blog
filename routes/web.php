@@ -66,6 +66,9 @@ Route::group(['middleware' => 'auth'], function() {
     //投稿
     Route::post('/topic/{topic}/submit', 'TopicController@submit');
 
+    //通知
+    Route::get('notices', 'NoticeController@index');
+
 });
 //后台
 include_once("admin.php");

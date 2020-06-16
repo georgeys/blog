@@ -33,7 +33,11 @@ class AdminUser extends Authenticatable
     //!! 0为false >1 为true
     public function isInRoles($roles)
     {
-        return !!$roles->intersect($this->roles)->count();
+        if ($this->roles->intersect($roles)->count() > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
     //给用户分配角色
     public function assignRole($role)

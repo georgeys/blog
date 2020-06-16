@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         //定义权限
-        //所有的权限
+        //不知道什么问题没有用
         $permissions = AdminPermission::all();
         foreach ($permissions as $permission){
             //定义门卫（以permission的name定义）
