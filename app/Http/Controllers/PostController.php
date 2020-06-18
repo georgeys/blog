@@ -16,7 +16,7 @@ class PostController extends Controller
 //        $log = app()->make("log");
 //        $log->info("post_index",['data' => 'this is log']);
 
-        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments','zans'])->paginate(5);
+        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments','zans'])->paginate(9);
         return view('post.index', compact("posts"));
     }
 
@@ -38,14 +38,13 @@ class PostController extends Controller
         //验证
         $this->validate(\request(), [
             'title' => 'required|string|max:100|min:3',
-            'content' => 'required|string|min:10'
+            'content' => 'required|string|min:10|max:9999'
         ]);
         //luiji
         $user_id = Auth::id();
         $param = array_merge(request(['title', 'content']),compact('user_id'));
         Post::create($param);
         return redirect('/');
-
     }
 
     //编辑页面
@@ -54,23 +53,23 @@ class PostController extends Controller
         return view('post.edit',compact('post'));
     }
 
-//    //编辑逻辑
-//    public function update(Post $post)
-//    {
-//        //验证
-//        $this->validate(\request(),[
-//            'title' => 'required|string|max:100|min:3',
-//            'content' => 'required|string|min:50'
-//        ]);
-//        //编辑权限
-//        $this->authorize('update',$post);
-//        //逻辑
-//        $post->title = \request('title');
-//        $post->content = \request('content');
-//        $post->save();
-//        //渲染
-//        return redirect("/posts/{$post->id}");
-//    }
+    //编辑逻辑
+    public function update(Post $post)
+    {
+        //验证
+        $this->validate(\request(),[
+            'title' => 'required|string|max:100|min:3',
+            'content' => 'required|string|min:50'
+        ]);
+        //编辑权限
+        $this->authorize('update',$post);
+        //逻辑
+        $post->title = \request('title');
+        $post->content = \request('content');
+        $post->save();
+        //渲染
+        return redirect("/posts/{$post->id}");
+    }
 
     //删除功能
     public function delete(Post $post)
@@ -95,7 +94,7 @@ class PostController extends Controller
     {
         //验证
         $this->validate(\request(),[
-            'content' => 'required|string|min:15|max:500'
+            'content' => 'required|string|min:5|max:500'
         ]);
         //逻辑
         $user_id = Auth::id();

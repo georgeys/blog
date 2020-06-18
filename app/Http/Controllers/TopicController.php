@@ -21,7 +21,6 @@ class TopicController extends Controller
         //没有投稿的但是属于我的文章
 //        $p= new Post();
         $myposts = Post::authorBy(Auth::id())->topicNotBy($topic->id)->paginate(10);
-
         return view('topic.show',compact('topic','posts','myposts'));
     }
     //投稿
@@ -37,5 +36,6 @@ class TopicController extends Controller
         {
             PostTopic::firstOrCreate(compact('post_id','topic_id'));
         }
+        return back();
     }
 }

@@ -19,7 +19,7 @@
             </div>
 
             <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}}
-	            <a href="#">{{$post->user->name}}</a>
+	            <a href="/user/{{$post->user->id}}">{{$post->user->name}}</a>
             </p>
             <p>{!! $post->content !!}</p>
             <div class="panel panel-default">

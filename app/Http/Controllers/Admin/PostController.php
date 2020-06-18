@@ -27,4 +27,20 @@ class PostController extends Controller
           'msg'   =>''
         ];
     }
+    //文章详情页面
+    public function show(Post $post)
+    {
+        return view('admin.post.show',compact('post'));
+    }
+    //审核文章
+    public function showStatus(Post $post)
+    {
+        $this->validate(\request(),[
+            'status' => 'required|in:-1,1'
+        ]);
+        $post->status =\request('status');
+        $post->save();
+
+        return redirect('admin/posts');
+    }
 }

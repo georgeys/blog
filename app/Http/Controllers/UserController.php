@@ -10,12 +10,22 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    //个人设置页面
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *     //个人设置页面
+     */
     public function setting()
     {
         return view('user.setting');
     }
-    //个人设置行为修改姓名头像
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Validation\ValidationException
+     * //个人设置行为修改姓名头像
+     */
     public function settingStore(Request $request)
     {
         $this->validate($request,[
@@ -39,13 +49,18 @@ class UserController extends Controller
         $result = $user->save();
         if ($result){return redirect("/user/".Auth::id());}
     }
-    //个人中心详情页面
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *     //个人中心详情页面
+     */
     public function show(User $user)
     {
         //个人的信息，包含文章数/粉丝/关注
         //without中填写model：User中的hansMany的方法名（得到数量）
         $posts = $user->posts()->orderBy('created_at','desc')->paginate(5);
-        $user1 = User::withCount(['posts','fans','stars'])->get()->where('id', $user->id)->first();
+        $user = User::withCount(['posts','fans','stars'])->get()->where('id', $user->id)->first();
         //返回多user1比user多上3个数量
         //  #attributes: array:11 [▼
         //    "id" => 5
@@ -65,17 +80,30 @@ class UserController extends Controller
         //个人关注的用户，该用户的姓名/粉丝/关注
         //pluck取表中一列中所有值组成数组(取出来$stars所有的star_id)
         $stars = $user->stars()->get();
-        $susers = User::whereIn('id',$stars->pluck('star_id'))->withCount(['posts','fans','stars'])->paginate(10);
+        $susers = User::whereIn('id',$stars->pluck('star_id'))->paginate(10);
 
+//        foreach ($user->fans as $fans)
+//        {
+//            echo $fans->fan_id."<br>";
+//        }
+//        die();
 
         //关注这个人的用户（这个人的粉丝），该用户的姓名/粉丝/关注
         //$fans = $user ->fans()->get();可以写成这样
         //pluck取表中一列中所有值组成数组(取出来$fans所有的fan_id)
         $fans = $user ->fans;
-        $fusers = User::whereIn('id',$fans->pluck('fan_id'))->withCount(['posts','fans','stars'])->paginate(10);
-        return view('user.show',compact('posts','user1','susers','fusers'));
+        //withCount后想添加条件放到最后(但这样无法分页...)放弃了在前段写
+        $fusers = User::whereIn('id',$fans->pluck('fan_id'))->paginate(10);
+//        //dd($fans->pluck('fan_id'));
+//       dd($fusers);
+        return view('user.show',compact('posts','user','susers','fusers'));
     }
-    //关注用户
+
+    /**
+     * @param User $user
+     * @return array
+     *  //关注用户
+     */
     public function fan(User $user)
     {
         $me = Auth::user();
@@ -85,7 +113,11 @@ class UserController extends Controller
             'msg'   =>''
         ];
     }
-    //取消关注
+    /**
+     * @param User $user
+     * @return array
+     * 取消关注
+     */
     public function unfan(User $user)
     {
         $me = Auth::user();

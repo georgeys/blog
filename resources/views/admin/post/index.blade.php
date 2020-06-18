@@ -4,7 +4,7 @@
         <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-lg-10 col-xs-6">
+                <div class="col-lg-10 col-xs-10">
                     <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title">文章列表</h3>
@@ -20,7 +20,7 @@
                                 @foreach($posts as $post)
                                 <tr>
                                     <td>{{$post->id}}</td>
-                                    <td>{{$post->title}}</td>
+                                    <td><a href="/admin/posts/{{$post->id}}">{{$post->title}}</a></td>
                                     <td>
                                         <button type="button" class="btn btn-block btn-default post-audit" post-id="{{$post->id}}" post-action-status="1" >通过</button>
                                         <button type="button" class="btn btn-block btn-default post-audit" post-id="{{$post->id}}" post-action-status="-1" >拒绝</button>
@@ -28,10 +28,9 @@
                                 </tr>
                                 @endforeach
                                 </tbody></table>
-                            {{$posts->links()}}
                         </div>
-
                     </div>
+                    {{$posts->links()}}
                 </div>
             </div>
         </section>

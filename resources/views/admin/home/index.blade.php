@@ -4,7 +4,7 @@
         <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-10 col-xs-10">
                     <!-- small box -->
                     欢迎
                 </div>

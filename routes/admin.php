@@ -14,6 +14,9 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::group(['middleware' => 'auth.admin'], function(){
         //首页
+        Route::get('/', function () {
+            return redirect('admin/home');
+        });
         Route::get('/home','Admin\HomeController@index');
 
         // 系统管理
@@ -41,13 +44,17 @@ Route::group(['prefix' => 'admin'], function() {
             //审核文章模块
             Route::get('posts', 'Admin\PostController@index');
             Route::post('posts/{post}/status', 'Admin\PostController@status');
+            //
+            Route::get('posts/{post}', 'Admin\PostController@show');
+            Route::get('posts/{post}/showStatus', 'Admin\PostController@showStatus');
+
 
             //文章专题
             Route::resource('topics','Admin\TopicController',['only'=>['index','create',
                 'store','destroy']]);
             //通知
-        Route::resource('notices','Admin\NoticeController',['only'=>['index',
-            'create','store']]);
+            Route::resource('notices','Admin\NoticeController',['only'=>['index',
+            'create','store','destroy']]);
         });
 
 

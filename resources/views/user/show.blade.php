@@ -2,9 +2,10 @@
 @section('content')
         <div class="col-sm-8">
             <blockquote>
-                <p><img src="{{$user1->avatar}}" alt="" class="img-rounded" style="border-radius:500px; height: 40px"> {{Auth::user()->name}}
+                <p><img src="{{$user->avatar}}" alt="" class="img-rounded" style="border-radius:500px; height: 40px"> {{$user->name}}
+                    @include('user.like',['target_user' => $user])
                 </p>
-                <footer>关注：{{$user1->stars_count}}｜粉丝：{{$user1->fans_count}}｜文章：{{$user1->posts_count}}</footer>
+                <footer>文章：{{$user->posts_count}} | 关注：{{$user->stars_count}}｜粉丝：{{$user->fans_count}}</footer>
             </blockquote>
         </div>
         <div class="col-sm-8 blog-main">
@@ -18,7 +19,7 @@
                     <div class="tab-pane active" id="tab_1">
                         @foreach($posts as $post)
                         <div class="blog-post" style="margin-top: 30px">
-                            <p class=""><a href="/user/{{$user1->id}}">{{$user1->name}}</a> {{$post->created_at->diffForHumans()}}</p>
+                            <p class=""><a href="/user/{{$user->id}}">{{$user->name}}</a> {{$post->created_at->diffForHumans()}}</p>
                             <p class=""><a href="/posts/{{$post->id}}" >{{$post->title}}</a></p>
                             {!! str_limit($post->content,100,'...') !!}
                         </div>
@@ -28,23 +29,22 @@
 
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
-
                         @foreach($susers as $user)
                         <div class="blog-post" style="margin-top: 30px">
                             <p class="">{{$user->name}}</p>
-                            <p class="">关注：{{$user->stars_count}} | 粉丝：{{$user->fans_count}}｜ 文章：{{$user->posts_count}}</p>
+                            <p class="">关注：{{$user->stars->count()}} | 粉丝：{{$user->fans->count()}}｜ 文章：{{$user->posts->count()}}</p>
                             @include('user.like',['target_user' => $user])
                         </div>
                         @endforeach
-                            {{$susers->links()}}
+                        {{$susers->links()}}
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_3">
                         @foreach($fusers as $user)
                             <div class="blog-post" style="margin-top: 30px">
                                 <p class="">{{$user->name}}</p>
-                                <p class="">关注：{{$user->stars_count}} | 粉丝：{{$user->fans_count}}｜ 文章：{{$user->posts_count}}</p>
-                                @include('user.like',['target_user' => $user])
+                                <p class="">关注：{{$user->stars->count()}} | 粉丝：{{$user->fans->count()}}｜ 文章：{{$user->posts->count()}}</p>
+                                @include('user.like',['target_user' => $user,'target_user'])
                             </div>
                         @endforeach
                         {{$fusers->links()}}

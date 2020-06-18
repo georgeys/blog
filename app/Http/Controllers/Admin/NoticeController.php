@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Jobs\SendMessage;
 use App\Notice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,17 @@ class NoticeController extends Controller
           'title'   => 'required|string|min:2|max:50',
           'content' => 'required|string|min:1|max:9999'
       ]);
-      Notice::create(\request(['title','content']));
+      $notice = Notice::create(\request(['title','content']));
+      //分配通知（分发给队列）
+      dispatch(new SendMessage($notice));
       return redirect('admin/notices');
+    }
+    public function destroy(Notice $notice)
+    {
+        $notice->delete();
+        return[
+            'error' => '0',
+            'msg'  => ''
+        ];
     }
 }

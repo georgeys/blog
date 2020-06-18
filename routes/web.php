@@ -30,7 +30,6 @@ Route::get('/posts/{post}', 'PostController@show')->where('post','[0-9]+');
 Route::get('/topic/{topic}','TopicController@show')->where('post','[0-9]+');
 
 
-
 Route::group(['middleware' => 'auth'], function() {
     //个人中心
     Route::get('/user/{user}', 'UserController@show');

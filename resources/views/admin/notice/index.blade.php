@@ -5,7 +5,7 @@
         <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-lg-10 col-xs-6">
+                <div class="col-lg-10 col-xs-10">
                     <div class="box">
 
                         <div class="box-header with-border">
@@ -24,7 +24,10 @@
                                 <tr>
                                     <td>{{$notice->id}}</td>
                                     <td>{{$notice->title}}</td>
-                                    <td></td>
+                                    <td>
+                                        <a type="button" class="btn resource-delete"
+                                           delete-url="/admin/notices/{{$notice->id}}" href="#" >删除</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                                 </tbody></table>
